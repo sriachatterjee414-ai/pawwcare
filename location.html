@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Pet Location 📍</title>
+
+    <link
+        rel="stylesheet"
+        href="location.css"
+    >
+
+</head>
+
+
+<body>
+
+<div class="page">
+
+    <!-- BACK -->
+
+    <button
+        class="back-button"
+        onclick="goBack()"
+    >
+        ← Back to Health
+    </button>
+
+
+    <!-- HEADER -->
+
+    <header>
+
+        <div class="location-icon">
+            📍
+        </div>
+
+        <div>
+
+            <p class="eyebrow">
+                PET PASSPORT
+            </p>
+
+            <h1>
+                Live Location
+            </h1>
+
+            <span id="petName">
+                🐾 My Pet
+            </span>
+
+        </div>
+
+    </header>
+
+
+    <!-- TRACKER STATUS -->
+
+    <section class="card tracker-card">
+
+        <div class="status-top">
+
+            <div>
+
+                <p class="eyebrow">
+                    GPS TRACKER
+                </p>
+
+                <h2 id="trackerStatusTitle">
+                    Tracker not connected
+                </h2>
+
+            </div>
+
+            <div
+                id="statusDot"
+                class="status-dot offline"
+            ></div>
+
+        </div>
+
+
+        <div
+            id="trackerMessage"
+            class="tracker-message"
+        >
+
+            📡 Your pet does not have a GPS
+            tracker connected yet.
+
+            <br><br>
+
+            This feature will work with a
+            compatible 4G/GPS collar tracker.
+
+        </div>
+
+
+        <button
+            id="connectButton"
+            class="pink-button"
+            onclick="connectTracker()"
+        >
+            📡 Connect GPS Tracker
+        </button>
+
+    </section>
+
+
+    <!-- MAP -->
+
+    <section class="card">
+
+        <div class="section-heading">
+
+            <div>
+
+                <p class="eyebrow">
+                    LOCATION
+                </p>
+
+                <h2>
+                    Where is my pet? 🐾
+                </h2>
+
+            </div>
+
+            <span
+                id="liveBadge"
+                class="live-badge offline-badge"
+            >
+                OFFLINE
+            </span>
+
+        </div>
+
+
+        <div
+            id="map"
+            class="map"
+        >
+
+            <div class="map-placeholder">
+
+                <div class="map-paw">
+                    📍
+                </div>
+
+                <h3>
+                    Waiting for GPS
+                </h3>
+
+                <p>
+                    Your pet's live location
+                    will appear here when a
+                    tracker is connected.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- LOCATION INFORMATION -->
+
+    <section class="info-grid">
+
+
+        <div class="info-card">
+
+            <span class="info-icon">
+                📍
+            </span>
+
+            <div>
+
+                <small>
+                    LATITUDE
+                </small>
+
+                <strong id="latitude">
+                    —
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <div class="info-card">
+
+            <span class="info-icon">
+                🧭
+            </span>
+
+            <div>
+
+                <small>
+                    LONGITUDE
+                </small>
+
+                <strong id="longitude">
+                    —
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <div class="info-card">
+
+            <span class="info-icon">
+                🔋
+            </span>
+
+            <div>
+
+                <small>
+                    BATTERY
+                </small>
+
+                <strong id="battery">
+                    —
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <div class="info-card">
+
+            <span class="info-icon">
+                🕐
+            </span>
+
+            <div>
+
+                <small>
+                    LAST UPDATE
+                </small>
+
+                <strong id="lastUpdate">
+                    —
+                </strong>
+
+            </div>
+
+        </div>
+
+
+    </section>
+
+
+    <!-- TRACKER DETAILS -->
+
+    <section class="card">
+
+        <h2>
+            📡 Tracker Details
+        </h2>
+
+
+        <div class="detail-row">
+
+            <span>
+                Tracker ID
+            </span>
+
+            <strong id="trackerId">
+                Not connected
+            </strong>
+
+        </div>
+
+
+        <div class="detail-row">
+
+            <span>
+                Connection
+            </span>
+
+            <strong id="connectionType">
+                —
+            </strong>
+
+        </div>
+
+
+        <div class="detail-row">
+
+            <span>
+                GPS accuracy
+            </span>
+
+            <strong id="accuracy">
+                —
+            </strong>
+
+        </div>
+
+
+        <div class="detail-row">
+
+            <span>
+                Speed
+            </span>
+
+            <strong id="speed">
+                —
+            </strong>
+
+        </div>
+
+    </section>
+
+
+    <!-- LOCATION HISTORY -->
+
+    <section class="card">
+
+        <div class="section-heading">
+
+            <div>
+
+                <p class="eyebrow">
+                    HISTORY
+                </p>
+
+                <h2>
+                    Recent Locations
+                </h2>
+
+            </div>
+
+        </div>
+
+
+        <div id="locationHistory">
+
+            <div class="empty-history">
+
+                🐾
+
+                <p>
+                    No location history yet.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- SAFETY -->
+
+    <section class="safety-card">
+
+        <div class="safety-icon">
+            🛡️
+        </div>
+
+        <div>
+
+            <h3>
+                Location Safety
+            </h3>
+
+            <p>
+                Pet Passport will only display
+                tracker information when a
+                compatible GPS device is connected.
+            </p>
+
+        </div>
+
+    </section>
+
+</div>
+
+
+<div id="toast">
+</div>
+
+
+<script src="location.js"></script>
+
+</body>
+
+</html>
