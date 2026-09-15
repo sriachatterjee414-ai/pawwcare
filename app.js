@@ -151,7 +151,42 @@ function openMedication() {
     window.location.href =
         `medication.html?pet=${currentPetId}`;
 }
+// =============================
+// OPEN TIMELINE
+// =============================
 
+function openTimeline() {
+
+    if (!currentPetId) {
+
+        showToast(
+            "🐾 Please select a pet first!"
+        );
+
+        return;
+    }
+
+    window.location.href =
+        `timeline.html?pet=${currentPetId}`;
+}
+// =============================
+// OPEN BATHROOM PAGE
+// =============================
+
+function openBathroom() {
+
+    if (!currentPetId) {
+
+        showToast(
+            "🐾 Please select a pet first!"
+        );
+
+        return;
+    }
+
+    window.location.href =
+        `bathroom.html?pet=${currentPetId}`;
+}
 
 // =============================
 // SPECIES
@@ -572,7 +607,14 @@ function renderDashboard(pet) {
                 >
                     💊 Medication
                 </button>
-
+                <button
+                    class="quick-button"
+                    onclick="openBathroom()"
+                >
+                     🚽 Bathroom
+            </button>
+ 
+           
             </div>
 
 
@@ -610,7 +652,27 @@ function renderDashboard(pet) {
 
             </div>
 
+<!-- LIFE TIMELINE -->
 
+<div class="info-box timeline-box">
+
+    <h3>
+        📖 Life Timeline
+    </h3>
+
+    <p>
+        See everything that happened
+        throughout your pet's life.
+    </p>
+
+    <button
+        class="quick-button"
+        onclick="openTimeline()"
+    >
+        📖 View Timeline
+    </button>
+
+</div>
             <!-- WEIGHT -->
 
             <div class="info-box">
