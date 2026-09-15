@@ -74,7 +74,7 @@ function showComingSoon() {
 
 
 // =============================
-// OPEN HEALTH PAGE
+// HEALTH PAGE
 // =============================
 
 function openHealth() {
@@ -88,33 +88,14 @@ function openHealth() {
         return;
     }
 
+
     window.location.href =
         `health.html?pet=${currentPetId}`;
 }
 
 
 // =============================
-// OPEN FOOD PAGE
-// =============================
-
-function openFood() {
-
-    if (!currentPetId) {
-
-        showToast(
-            "🐾 Please select a pet first!"
-        );
-
-        return;
-    }
-
-    window.location.href =
-        `food.html?pet=${currentPetId}`;
-}
-
-
-// =============================
-// OPEN WATER PAGE
+// WATER PAGE
 // =============================
 
 function openWater() {
@@ -128,13 +109,35 @@ function openWater() {
         return;
     }
 
+
     window.location.href =
         `water.html?pet=${currentPetId}`;
 }
 
 
 // =============================
-// OPEN MEDICATION PAGE
+// BATHROOM PAGE
+// =============================
+
+function openBathroom() {
+
+    if (!currentPetId) {
+
+        showToast(
+            "🐾 Please select a pet first!"
+        );
+
+        return;
+    }
+
+
+    window.location.href =
+        `bathroom.html?pet=${currentPetId}`;
+}
+
+
+// =============================
+// MEDICATION PAGE
 // =============================
 
 function openMedication() {
@@ -147,6 +150,7 @@ function openMedication() {
 
         return;
     }
+
 
     window.location.href =
         `medication.html?pet=${currentPetId}`;
@@ -541,7 +545,9 @@ function renderDashboard(pet) {
         <div class="dashboard-content">
 
 
+            <!-- ========================= -->
             <!-- TODAY'S CARE -->
+            <!-- ========================= -->
 
             <div class="info-box">
 
@@ -552,9 +558,9 @@ function renderDashboard(pet) {
 
                 <button
                     class="quick-button"
-                    onclick="openFood()"
+                    onclick="markCare(this)"
                 >
-                    🍗 Food
+                    🍗 Breakfast
                 </button>
 
 
@@ -562,7 +568,7 @@ function renderDashboard(pet) {
                     class="quick-button"
                     onclick="openWater()"
                 >
-                    💧 Water
+                    💧 Water Tracker
                 </button>
 
 
@@ -576,7 +582,9 @@ function renderDashboard(pet) {
             </div>
 
 
+            <!-- ========================= -->
             <!-- MOOD -->
+            <!-- ========================= -->
 
             <div class="info-box">
 
@@ -611,7 +619,9 @@ function renderDashboard(pet) {
             </div>
 
 
+            <!-- ========================= -->
             <!-- WEIGHT -->
+            <!-- ========================= -->
 
             <div class="info-box">
 
@@ -633,7 +643,9 @@ function renderDashboard(pet) {
             </div>
 
 
+            <!-- ========================= -->
             <!-- HEALTH -->
+            <!-- ========================= -->
 
             <div class="info-box">
 
@@ -649,6 +661,7 @@ function renderDashboard(pet) {
                         pet.allergies ||
                         "None recorded"
                     )}
+
                 </p>
 
 
@@ -659,10 +672,20 @@ function renderDashboard(pet) {
                     🩺 Health Records
                 </button>
 
+
+                <button
+                    class="quick-button"
+                    onclick="openBathroom()"
+                >
+                    🚽 Bathroom Tracker
+                </button>
+
             </div>
 
 
+            <!-- ========================= -->
             <!-- MEMORIES -->
+            <!-- ========================= -->
 
             <div class="info-box">
 
@@ -687,7 +710,9 @@ function renderDashboard(pet) {
             </div>
 
 
+            <!-- ========================= -->
             <!-- EMERGENCY -->
+            <!-- ========================= -->
 
             <div class="info-box">
 
@@ -701,6 +726,43 @@ function renderDashboard(pet) {
                     onclick="showEmergency(pet)"
                 >
                     Open Emergency Mode
+                </button>
+
+            </div>
+
+
+            <!-- ========================= -->
+            <!-- QUICK HEALTH TRACKING -->
+            <!-- ========================= -->
+
+            <div class="info-box">
+
+                <h3>
+                    📋 Daily Health
+                </h3>
+
+
+                <button
+                    class="quick-button"
+                    onclick="openWater()"
+                >
+                    💧 Log Water
+                </button>
+
+
+                <button
+                    class="quick-button"
+                    onclick="openBathroom()"
+                >
+                    🚽 Log Bathroom
+                </button>
+
+
+                <button
+                    class="quick-button"
+                    onclick="openMedication()"
+                >
+                    💊 Manage Medication
                 </button>
 
             </div>
@@ -789,7 +851,6 @@ function getAge(birthday) {
     )} month${
         totalMonths === 1 ? "" : "s"
     } old`;
-
 }
 
 
@@ -826,7 +887,6 @@ function setMood(mood) {
     showToast(
         `${mood} Mood recorded!`
     );
-
 }
 
 
@@ -864,7 +924,6 @@ function showEmergency(pet) {
         `will be added in a future version.`
 
     );
-
 }
 
 
@@ -964,6 +1023,9 @@ function showToast(message) {
         document.getElementById(
             "toast"
         );
+
+
+    if (!toast) return;
 
 
     toast.textContent =
