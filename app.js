@@ -4,6 +4,9 @@ let pets = JSON.parse(
 
 let selectedSpecies = "Dog";
 
+// Keeps track of the pet currently being viewed
+let currentPetId = null;
+
 
 // =============================
 // PAGE NAVIGATION
@@ -39,9 +42,15 @@ function openAddPet() {
 
 function showPet(id) {
 
-    const pet = pets.find(p => p.id === id);
+    // Remember which pet is currently open
+    currentPetId = id;
+
+    const pet = pets.find(
+        p => p.id === id
+    );
 
     if (!pet) return;
+
 
     document.getElementById("homePage")
         .classList.add("hidden");
@@ -51,6 +60,7 @@ function showPet(id) {
 
     document.getElementById("petPage")
         .classList.remove("hidden");
+
 
     renderDashboard(pet);
 }
@@ -65,6 +75,27 @@ function showComingSoon() {
 
 
 // =============================
+// OPEN HEALTH PAGE
+// =============================
+
+function openHealth() {
+
+    if (!currentPetId) {
+
+        showToast(
+            "🐾 Please select a pet first!"
+        );
+
+        return;
+    }
+
+
+    window.location.href =
+        `health.html?pet=${currentPetId}`;
+}
+
+
+// =============================
 // SPECIES
 // =============================
 
@@ -72,13 +103,16 @@ function chooseSpecies(species) {
 
     selectedSpecies = species;
 
+
     document
         .getElementById("dogChoice")
         .classList.remove("active");
 
+
     document
         .getElementById("catChoice")
         .classList.remove("active");
+
 
     if (species === "Dog") {
 
@@ -91,6 +125,7 @@ function chooseSpecies(species) {
         document
             .getElementById("catChoice")
             .classList.add("active");
+
     }
 }
 
@@ -102,8 +137,11 @@ function chooseSpecies(species) {
 function savePet() {
 
     const name =
-        document.getElementById("petName")
-            .value.trim();
+        document
+            .getElementById("petName")
+            .value
+            .trim();
+
 
     if (!name) {
 
@@ -125,65 +163,84 @@ function savePet() {
 
             id: Date.now(),
 
-            species: selectedSpecies,
+            species:
+                selectedSpecies,
 
-            name: name,
+            name:
+                name,
 
             breed:
-                document.getElementById("petBreed")
+                document
+                    .getElementById("petBreed")
                     .value,
 
             birthday:
-                document.getElementById("petBirthday")
+                document
+                    .getElementById("petBirthday")
                     .value,
 
             sex:
-                document.getElementById("petSex")
+                document
+                    .getElementById("petSex")
                     .value,
 
             weight:
-                document.getElementById("petWeight")
+                document
+                    .getElementById("petWeight")
                     .value,
 
             color:
-                document.getElementById("petColor")
+                document
+                    .getElementById("petColor")
                     .value,
 
             allergies:
-                document.getElementById("petAllergies")
+                document
+                    .getElementById("petAllergies")
                     .value,
 
             notes:
-                document.getElementById("petNotes")
+                document
+                    .getElementById("petNotes")
                     .value,
 
-            photo: photo,
+            photo:
+                photo,
+
 
             personality: {
 
                 energy:
-                    document.getElementById("energy")
+                    document
+                        .getElementById("energy")
                         .value,
 
                 social:
-                    document.getElementById("social")
+                    document
+                        .getElementById("social")
                         .value,
 
                 talkative:
-                    document.getElementById("talkative")
+                    document
+                        .getElementById("talkative")
                         .value,
 
                 affection:
-                    document.getElementById("affection")
+                    document
+                        .getElementById("affection")
                         .value
+
             },
+
 
             created:
                 new Date().toISOString()
+
         };
 
 
         pets.push(pet);
+
 
         localStorage.setItem(
             "petPassportPets",
@@ -192,6 +249,7 @@ function savePet() {
 
 
         clearForm();
+
 
         showToast(
             `💗 ${pet.name}'s passport was created!`
@@ -203,18 +261,24 @@ function savePet() {
             showHome();
 
         }, 800);
+
     };
 
 
     if (photoInput.files.length > 0) {
 
-        const reader = new FileReader();
+        const reader =
+            new FileReader();
+
 
         reader.onload = function(event) {
 
-            createPet(event.target.result);
+            createPet(
+                event.target.result
+            );
 
         };
+
 
         reader.readAsDataURL(
             photoInput.files[0]
@@ -235,7 +299,10 @@ function savePet() {
 function renderPets() {
 
     const container =
-        document.getElementById("petList");
+        document.getElementById(
+            "petList"
+        );
+
 
     if (pets.length === 0) {
 
@@ -295,7 +362,7 @@ function renderPets() {
                         `<img
                             class="pet-photo"
                             src="${pet.photo}"
-                            alt="${pet.name}"
+                            alt="${escapeHTML(pet.name)}"
                         >`
 
                         :
@@ -316,11 +383,16 @@ function renderPets() {
 
                         <p>
                             ${emoji}
-                            ${escapeHTML(pet.breed || pet.species)}
+                            ${escapeHTML(
+                                pet.breed ||
+                                pet.species
+                            )}
                         </p>
 
                         <p>
-                            ${getAge(pet.birthday)}
+                            ${getAge(
+                                pet.birthday
+                            )}
                         </p>
 
                     </div>
@@ -364,11 +436,14 @@ function renderDashboard(pet) {
                 `<img
                     class="dashboard-photo"
                     src="${pet.photo}"
+                    alt="${escapeHTML(pet.name)}"
                 >`
 
                 :
 
-                `<div class="dashboard-placeholder">
+                `<div
+                    class="dashboard-placeholder"
+                >
                     ${emoji}
                 </div>`
             }
@@ -386,8 +461,17 @@ function renderDashboard(pet) {
 
                 <p>
                     ${emoji}
-                    ${escapeHTML(pet.breed || pet.species)}
-                    · ${getAge(pet.birthday)}
+
+                    ${escapeHTML(
+                        pet.breed ||
+                        pet.species
+                    )}
+
+                    ·
+
+                    ${getAge(
+                        pet.birthday
+                    )}
                 </p>
 
             </div>
@@ -397,9 +481,15 @@ function renderDashboard(pet) {
 
         <div class="dashboard-content">
 
+
+            <!-- TODAY'S CARE -->
+
             <div class="info-box">
 
-                <h3>☀️ Today's Care</h3>
+                <h3>
+                    ☀️ Today's Care
+                </h3>
+
 
                 <button
                     class="quick-button"
@@ -407,6 +497,7 @@ function renderDashboard(pet) {
                 >
                     🍗 Breakfast
                 </button>
+
 
                 <button
                     class="quick-button"
@@ -418,9 +509,14 @@ function renderDashboard(pet) {
             </div>
 
 
+            <!-- MOOD -->
+
             <div class="info-box">
 
-                <h3>😸 Mood</h3>
+                <h3>
+                    😸 Mood
+                </h3>
+
 
                 <button
                     class="quick-button"
@@ -429,12 +525,14 @@ function renderDashboard(pet) {
                     😸 Happy
                 </button>
 
+
                 <button
                     class="quick-button"
                     onclick="setMood('🤪 Playful')"
                 >
                     🤪 Playful
                 </button>
+
 
                 <button
                     class="quick-button"
@@ -446,33 +544,50 @@ function renderDashboard(pet) {
             </div>
 
 
+            <!-- WEIGHT -->
+
             <div class="info-box">
 
-                <h3>⚖️ Weight</h3>
+                <h3>
+                    ⚖️ Weight
+                </h3>
+
 
                 <strong>
                     ${pet.weight || "--"} kg
                 </strong>
 
+
                 <p>
-                    Keep track of changes over time.
+                    Keep track of changes
+                    over time.
                 </p>
 
             </div>
 
 
+            <!-- HEALTH -->
+
             <div class="info-box">
 
-                <h3>💗 Health</h3>
+                <h3>
+                    💗 Health
+                </h3>
+
 
                 <p>
                     Allergies:
-                    ${escapeHTML(pet.allergies || "None recorded")}
+
+                    ${escapeHTML(
+                        pet.allergies ||
+                        "None recorded"
+                    )}
                 </p>
+
 
                 <button
                     class="quick-button"
-                    onclick="showComingSoon()"
+                    onclick="openHealth()"
                 >
                     🩺 Health Records
                 </button>
@@ -480,14 +595,20 @@ function renderDashboard(pet) {
             </div>
 
 
+            <!-- MEMORIES -->
+
             <div class="info-box">
 
-                <h3>📸 Memories</h3>
+                <h3>
+                    📸 Memories
+                </h3>
+
 
                 <p>
                     Save the little moments
                     that make them special.
                 </p>
+
 
                 <button
                     class="quick-button"
@@ -499,9 +620,14 @@ function renderDashboard(pet) {
             </div>
 
 
+            <!-- EMERGENCY -->
+
             <div class="info-box">
 
-                <h3>🚨 Emergency</h3>
+                <h3>
+                    🚨 Emergency
+                </h3>
+
 
                 <button
                     class="quick-button"
@@ -525,7 +651,9 @@ function renderDashboard(pet) {
 function getAge(birthday) {
 
     if (!birthday) {
+
         return "Birthday unknown";
+
     }
 
 
@@ -538,19 +666,22 @@ function getAge(birthday) {
 
     let years =
         now.getFullYear()
-        - birth.getFullYear();
+        -
+        birth.getFullYear();
 
 
     let months =
         now.getMonth()
-        - birth.getMonth();
+        -
+        birth.getMonth();
 
 
     if (
         months < 0 ||
         (
             months === 0 &&
-            now.getDate() < birth.getDate()
+            now.getDate() <
+            birth.getDate()
         )
     ) {
 
@@ -561,24 +692,36 @@ function getAge(birthday) {
 
     if (years > 0) {
 
-        return `${years} year${years === 1 ? "" : "s"} old`;
+        return `${years} year${
+            years === 1 ? "" : "s"
+        } old`;
 
     }
 
 
     const totalMonths =
+
         (
             now.getFullYear()
-            - birth.getFullYear()
+            -
+            birth.getFullYear()
         ) * 12
+
         +
+
         (
             now.getMonth()
-            - birth.getMonth()
+            -
+            birth.getMonth()
         );
 
 
-    return `${Math.max(0, totalMonths)} month${totalMonths === 1 ? "" : "s"} old`;
+    return `${Math.max(
+        0,
+        totalMonths
+    )} month${
+        totalMonths === 1 ? "" : "s"
+    } old`;
 }
 
 
@@ -590,22 +733,25 @@ function markCare(button) {
 
     button.innerHTML =
         "✓ " +
-        button.innerHTML.replace(
-            "🍗 ",
-            ""
-        ).replace(
-            "💧 ",
-            ""
-        );
+
+        button.innerHTML
+            .replace("🍗 ", "")
+            .replace("💧 ", "");
+
 
     button.style.background =
         "#ddfff2";
+
 
     showToast(
         "🐾 Care recorded!"
     );
 }
 
+
+// =============================
+// MOOD
+// =============================
 
 function setMood(mood) {
 
@@ -622,19 +768,32 @@ function setMood(mood) {
 function showEmergency(pet) {
 
     alert(
+
         `🚨 PET EMERGENCY\n\n` +
 
         `${pet.name}\n` +
 
         `${pet.species}\n` +
 
-        `Age: ${getAge(pet.birthday)}\n` +
+        `Age: ${
+            getAge(
+                pet.birthday
+            )
+        }\n` +
 
-        `Weight: ${pet.weight || "Unknown"} kg\n\n` +
+        `Weight: ${
+            pet.weight ||
+            "Unknown"
+        } kg\n\n` +
 
-        `Allergies: ${pet.allergies || "None recorded"}\n\n` +
+        `Allergies: ${
+            pet.allergies ||
+            "None recorded"
+        }\n\n` +
 
-        `Emergency veterinary contacts will be added in a future version.`
+        `Emergency veterinary contacts ` +
+        `will be added in a future version.`
+
     );
 }
 
@@ -645,31 +804,83 @@ function showEmergency(pet) {
 
 function clearForm() {
 
-    document.getElementById("petName").value = "";
+    document
+        .getElementById(
+            "petName"
+        ).value = "";
 
-    document.getElementById("petBreed").value = "";
 
-    document.getElementById("petBirthday").value = "";
+    document
+        .getElementById(
+            "petBreed"
+        ).value = "";
 
-    document.getElementById("petSex").value = "";
 
-    document.getElementById("petWeight").value = "";
+    document
+        .getElementById(
+            "petBirthday"
+        ).value = "";
 
-    document.getElementById("petColor").value = "";
 
-    document.getElementById("petAllergies").value = "";
+    document
+        .getElementById(
+            "petSex"
+        ).value = "";
 
-    document.getElementById("petNotes").value = "";
 
-    document.getElementById("petPhoto").value = "";
+    document
+        .getElementById(
+            "petWeight"
+        ).value = "";
 
-    document.getElementById("energy").value = 50;
 
-    document.getElementById("social").value = 50;
+    document
+        .getElementById(
+            "petColor"
+        ).value = "";
 
-    document.getElementById("talkative").value = 50;
 
-    document.getElementById("affection").value = 50;
+    document
+        .getElementById(
+            "petAllergies"
+        ).value = "";
+
+
+    document
+        .getElementById(
+            "petNotes"
+        ).value = "";
+
+
+    document
+        .getElementById(
+            "petPhoto"
+        ).value = "";
+
+
+    document
+        .getElementById(
+            "energy"
+        ).value = 50;
+
+
+    document
+        .getElementById(
+            "social"
+        ).value = 50;
+
+
+    document
+        .getElementById(
+            "talkative"
+        ).value = 50;
+
+
+    document
+        .getElementById(
+            "affection"
+        ).value = 50;
+
 }
 
 
@@ -680,18 +891,28 @@ function clearForm() {
 function showToast(message) {
 
     const toast =
-        document.getElementById("toast");
+        document.getElementById(
+            "toast"
+        );
 
-    toast.textContent = message;
 
-    toast.classList.add("show");
+    toast.textContent =
+        message;
+
+
+    toast.classList.add(
+        "show"
+    );
 
 
     setTimeout(() => {
 
-        toast.classList.remove("show");
+        toast.classList.remove(
+            "show"
+        );
 
     }, 2200);
+
 }
 
 
@@ -702,11 +923,32 @@ function showToast(message) {
 function escapeHTML(text) {
 
     return String(text)
-        .replaceAll("&", "&amp;")
-        .replaceAll("<", "&lt;")
-        .replaceAll(">", "&gt;")
-        .replaceAll('"', "&quot;")
-        .replaceAll("'", "&#039;");
+
+        .replaceAll(
+            "&",
+            "&amp;"
+        )
+
+        .replaceAll(
+            "<",
+            "&lt;"
+        )
+
+        .replaceAll(
+            ">",
+            "&gt;"
+        )
+
+        .replaceAll(
+            '"',
+            "&quot;"
+        )
+
+        .replaceAll(
+            "'",
+            "&#039;"
+        );
+
 }
 
 
