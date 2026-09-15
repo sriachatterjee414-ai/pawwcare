@@ -1,0 +1,252 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+
+    background:
+        radial-gradient(circle at top left, #fff3fb, transparent 35%),
+        radial-gradient(circle at bottom right, #eaf7ff, transparent 35%),
+        #fffaff;
+
+    color: #432d45;
+}
+
+.page {
+    width: min(900px, 92%);
+    margin: auto;
+    padding: 25px 0 60px;
+}
+
+.back-button {
+    border: none;
+    background: white;
+    padding: 12px 18px;
+
+    border-radius: 20px;
+
+    font-size: 15px;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    box-shadow: 0 5px 15px #eaddea;
+}
+
+header {
+    margin: 25px 0;
+
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+header .icon {
+    width: 75px;
+    height: 75px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #ffd6ec;
+
+    border-radius: 25px;
+
+    font-size: 40px;
+}
+
+header p {
+    margin: 0;
+
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 2px;
+
+    color: #d45b9e;
+}
+
+header h1 {
+    margin: 3px 0;
+    font-size: 32px;
+}
+
+header span {
+    color: #777;
+}
+
+.card {
+    background: white;
+
+    padding: 25px;
+
+    margin: 20px 0;
+
+    border-radius: 28px;
+
+    box-shadow:
+        0 8px 25px rgba(120, 80, 120, 0.12);
+}
+
+.card h2 {
+    margin-top: 0;
+}
+
+label {
+    display: block;
+
+    margin-top: 18px;
+    margin-bottom: 7px;
+
+    font-weight: bold;
+}
+
+input {
+    width: 100%;
+
+    padding: 14px;
+
+    border: 2px solid #f0ddec;
+
+    border-radius: 15px;
+
+    font-size: 16px;
+
+    outline: none;
+}
+
+input:focus {
+    border-color: #ff83bd;
+}
+
+.amount-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.amount-row input {
+    flex: 1;
+}
+
+.amount-row span {
+    font-weight: bold;
+}
+
+button {
+    font-family: inherit;
+}
+
+.pink-button,
+.blue-button {
+    width: 100%;
+
+    border: none;
+
+    margin-top: 20px;
+
+    padding: 15px;
+
+    border-radius: 18px;
+
+    font-size: 16px;
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+.pink-button {
+    background: #ff82bd;
+    color: white;
+}
+
+.blue-button {
+    background: #73c9ff;
+    color: white;
+}
+
+.section-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.section-title span {
+    background: #fff0a8;
+    padding: 8px 13px;
+    border-radius: 15px;
+    font-weight: bold;
+}
+
+.food-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    background: #fff8fc;
+
+    padding: 15px;
+
+    margin-top: 12px;
+
+    border-radius: 18px;
+}
+
+.food-item strong {
+    display: block;
+}
+
+.food-item small {
+    color: #777;
+}
+
+.delete-button {
+    border: none;
+    background: #ffe1e1;
+
+    padding: 9px 12px;
+
+    border-radius: 12px;
+
+    cursor: pointer;
+}
+
+#foodReminderStatus {
+    margin-top: 15px;
+
+    padding: 12px;
+
+    border-radius: 15px;
+
+    background: #edfff7;
+
+    color: #31805f;
+}
+
+#toast {
+    position: fixed;
+
+    bottom: 25px;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    background: #432d45;
+    color: white;
+
+    padding: 14px 22px;
+
+    border-radius: 20px;
+
+    opacity: 0;
+
+    pointer-events: none;
+
+    transition: 0.3s;
+}
+
+#toast.show {
+    opacity: 1;
+}
