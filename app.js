@@ -1,16 +1,22 @@
+// ============================================================
+// PET PASSPORT - MAIN APP.JS
+// ============================================================
+
+// ============================================================
+// PET DATA
+// ============================================================
+
 let pets = JSON.parse(
     localStorage.getItem("petPassportPets")
 ) || [];
 
 let selectedSpecies = "Dog";
-
-// Keeps track of the pet currently being viewed
 let currentPetId = null;
 
 
-// =============================
+// ============================================================
 // PAGE NAVIGATION
-// =============================
+// ============================================================
 
 function showHome() {
 
@@ -50,7 +56,6 @@ function showPet(id) {
 
     if (!pet) return;
 
-
     document.getElementById("homePage")
         .classList.add("hidden");
 
@@ -60,24 +65,15 @@ function showPet(id) {
     document.getElementById("petPage")
         .classList.remove("hidden");
 
-
     renderDashboard(pet);
 }
 
 
-function showComingSoon() {
+// ============================================================
+// TRACKER NAVIGATION
+// ============================================================
 
-    showToast(
-        "✨ This section is coming next!"
-    );
-}
-
-
-// =============================
-// HEALTH PAGE
-// =============================
-
-function openHealth() {
+function openFood() {
 
     if (!currentPetId) {
 
@@ -88,15 +84,10 @@ function openHealth() {
         return;
     }
 
-
     window.location.href =
-        `health.html?pet=${currentPetId}`;
+        `food.html?pet=${currentPetId}`;
 }
 
-
-// =============================
-// WATER PAGE
-// =============================
 
 function openWater() {
 
@@ -109,36 +100,10 @@ function openWater() {
         return;
     }
 
-
     window.location.href =
         `water.html?pet=${currentPetId}`;
 }
 
-
-// =============================
-// BATHROOM PAGE
-// =============================
-
-function openBathroom() {
-
-    if (!currentPetId) {
-
-        showToast(
-            "🐾 Please select a pet first!"
-        );
-
-        return;
-    }
-
-
-    window.location.href =
-        `bathroom.html?pet=${currentPetId}`;
-}
-
-
-// =============================
-// MEDICATION PAGE
-// =============================
 
 function openMedication() {
 
@@ -151,58 +116,106 @@ function openMedication() {
         return;
     }
 
-
     window.location.href =
         `medication.html?pet=${currentPetId}`;
 }
 
 
-// =============================
+function openBathroom() {
+
+    if (!currentPetId) {
+
+        showToast(
+            "🐾 Please select a pet first!"
+        );
+
+        return;
+    }
+
+    window.location.href =
+        `bathroom.html?pet=${currentPetId}`;
+}
+
+
+function openHealth() {
+
+    if (!currentPetId) {
+
+        showToast(
+            "🐾 Please select a pet first!"
+        );
+
+        return;
+    }
+
+    window.location.href =
+        `health.html?pet=${currentPetId}`;
+}
+
+
+// ============================================================
 // SPECIES
-// =============================
+// ============================================================
 
 function chooseSpecies(species) {
 
     selectedSpecies = species;
 
+    const dogChoice =
+        document.getElementById("dogChoice");
 
-    document
-        .getElementById("dogChoice")
-        .classList.remove("active");
+    const catChoice =
+        document.getElementById("catChoice");
 
 
-    document
-        .getElementById("catChoice")
-        .classList.remove("active");
+    if (dogChoice) {
+
+        dogChoice.classList.remove("active");
+
+    }
+
+
+    if (catChoice) {
+
+        catChoice.classList.remove("active");
+
+    }
 
 
     if (species === "Dog") {
 
-        document
-            .getElementById("dogChoice")
-            .classList.add("active");
+        if (dogChoice) {
+
+            dogChoice.classList.add("active");
+
+        }
 
     } else {
 
-        document
-            .getElementById("catChoice")
-            .classList.add("active");
+        if (catChoice) {
+
+            catChoice.classList.add("active");
+
+        }
 
     }
 }
 
 
-// =============================
+// ============================================================
 // SAVE PET
-// =============================
+// ============================================================
 
 function savePet() {
 
+    const nameElement =
+        document.getElementById("petName");
+
+    if (!nameElement) return;
+
+
     const name =
-        document
-            .getElementById("petName")
-            .value
-            .trim();
+        nameElement.value.trim();
 
 
     if (!name) {
@@ -291,9 +304,12 @@ function savePet() {
                     document
                         .getElementById("affection")
                         .value
-
             },
 
+
+            // IMPORTANT:
+            // This is used for Day 1 / Day 2 / Day 3
+            // and is automatically saved.
 
             created:
                 new Date().toISOString()
@@ -327,7 +343,10 @@ function savePet() {
     };
 
 
-    if (photoInput.files.length > 0) {
+    if (
+        photoInput &&
+        photoInput.files.length > 0
+    ) {
 
         const reader =
             new FileReader();
@@ -354,16 +373,16 @@ function savePet() {
 }
 
 
-// =============================
+// ============================================================
 // PET CARDS
-// =============================
+// ============================================================
 
 function renderPets() {
 
     const container =
-        document.getElementById(
-            "petList"
-        );
+        document.getElementById("petList");
+
+    if (!container) return;
 
 
     if (pets.length === 0) {
@@ -424,7 +443,9 @@ function renderPets() {
                         `<img
                             class="pet-photo"
                             src="${pet.photo}"
-                            alt="${escapeHTML(pet.name)}"
+                            alt="${escapeHTML(
+                                pet.name
+                            )}"
                         >`
 
                         :
@@ -440,7 +461,9 @@ function renderPets() {
                     <div class="pet-info">
 
                         <h3>
-                            ${escapeHTML(pet.name)}
+                            ${escapeHTML(
+                                pet.name
+                            )}
                         </h3>
 
                         <p>
@@ -468,9 +491,9 @@ function renderPets() {
 }
 
 
-// =============================
-// DASHBOARD
-// =============================
+// ============================================================
+// MAIN DASHBOARD
+// ============================================================
 
 function renderDashboard(pet) {
 
@@ -485,8 +508,14 @@ function renderDashboard(pet) {
             "petDashboard"
         );
 
+    if (!dashboard) return;
+
 
     dashboard.innerHTML = `
+
+        <!-- ================================================= -->
+        <!-- PET HEADER -->
+        <!-- ================================================= -->
 
         <div class="dashboard-header">
 
@@ -498,7 +527,9 @@ function renderDashboard(pet) {
                 `<img
                     class="dashboard-photo"
                     src="${pet.photo}"
-                    alt="${escapeHTML(pet.name)}"
+                    alt="${escapeHTML(
+                        pet.name
+                    )}"
                 >`
 
                 :
@@ -518,10 +549,13 @@ function renderDashboard(pet) {
                 </p>
 
                 <h2>
-                    ${escapeHTML(pet.name)}
+                    ${escapeHTML(
+                        pet.name
+                    )}
                 </h2>
 
                 <p>
+
                     ${emoji}
 
                     ${escapeHTML(
@@ -542,12 +576,12 @@ function renderDashboard(pet) {
         </div>
 
 
+        <!-- ================================================= -->
+        <!-- TODAY'S CARE -->
+        <!-- ================================================= -->
+
         <div class="dashboard-content">
 
-
-            <!-- ========================= -->
-            <!-- TODAY'S CARE -->
-            <!-- ========================= -->
 
             <div class="info-box">
 
@@ -558,9 +592,9 @@ function renderDashboard(pet) {
 
                 <button
                     class="quick-button"
-                    onclick="markCare(this)"
+                    onclick="openFood()"
                 >
-                    🍗 Breakfast
+                    🍗 Food Tracker
                 </button>
 
 
@@ -582,9 +616,9 @@ function renderDashboard(pet) {
             </div>
 
 
-            <!-- ========================= -->
+            <!-- ================================================= -->
             <!-- MOOD -->
-            <!-- ========================= -->
+            <!-- ================================================= -->
 
             <div class="info-box">
 
@@ -619,9 +653,9 @@ function renderDashboard(pet) {
             </div>
 
 
-            <!-- ========================= -->
+            <!-- ================================================= -->
             <!-- WEIGHT -->
-            <!-- ========================= -->
+            <!-- ================================================= -->
 
             <div class="info-box">
 
@@ -643,26 +677,15 @@ function renderDashboard(pet) {
             </div>
 
 
-            <!-- ========================= -->
-            <!-- HEALTH -->
-            <!-- ========================= -->
+            <!-- ================================================= -->
+            <!-- RECORDS -->
+            <!-- ================================================= -->
 
             <div class="info-box">
 
                 <h3>
-                    💗 Health
+                    📋 Records
                 </h3>
-
-
-                <p>
-                    Allergies:
-
-                    ${escapeHTML(
-                        pet.allergies ||
-                        "None recorded"
-                    )}
-
-                </p>
 
 
                 <button
@@ -683,9 +706,9 @@ function renderDashboard(pet) {
             </div>
 
 
-            <!-- ========================= -->
+            <!-- ================================================= -->
             <!-- MEMORIES -->
-            <!-- ========================= -->
+            <!-- ================================================= -->
 
             <div class="info-box">
 
@@ -710,9 +733,9 @@ function renderDashboard(pet) {
             </div>
 
 
-            <!-- ========================= -->
+            <!-- ================================================= -->
             <!-- EMERGENCY -->
-            <!-- ========================= -->
+            <!-- ================================================= -->
 
             <div class="info-box">
 
@@ -723,7 +746,7 @@ function renderDashboard(pet) {
 
                 <button
                     class="quick-button"
-                    onclick="showEmergency(pet)"
+                    onclick="showEmergency()"
                 >
                     Open Emergency Mode
                 </button>
@@ -731,39 +754,33 @@ function renderDashboard(pet) {
             </div>
 
 
-            <!-- ========================= -->
-            <!-- QUICK HEALTH TRACKING -->
-            <!-- ========================= -->
+            <!-- ================================================= -->
+            <!-- TIMELINE -->
+            <!-- ================================================= -->
 
-            <div class="info-box">
+            <div class="info-box timeline-box">
 
                 <h3>
-                    📋 Daily Health
+                    📅 Life Timeline
                 </h3>
 
 
-                <button
-                    class="quick-button"
-                    onclick="openWater()"
-                >
-                    💧 Log Water
-                </button>
+                <p class="timeline-subtitle">
+
+                    ${escapeHTML(
+                        pet.name
+                    )}'s daily records
+
+                </p>
 
 
-                <button
-                    class="quick-button"
-                    onclick="openBathroom()"
-                >
-                    🚽 Log Bathroom
-                </button>
+                <div id="petTimeline">
 
+                    ${renderTimeline(
+                        pet
+                    )}
 
-                <button
-                    class="quick-button"
-                    onclick="openMedication()"
-                >
-                    💊 Manage Medication
-                </button>
+                </div>
 
             </div>
 
@@ -773,319 +790,275 @@ function renderDashboard(pet) {
 }
 
 
-// =============================
-// AGE CALCULATOR
-// =============================
+// ============================================================
+// DAY NUMBER
+// ============================================================
+//
+// The pet's creation date = Day 1.
+//
+// Example:
+//
+// Pet created September 15
+// September 15 = Day 1
+// September 16 = Day 2
+// September 17 = Day 3
+//
+// It changes automatically based on the calendar date.
+// ============================================================
 
-function getAge(birthday) {
+function getPetDayNumber(
+    pet,
+    date = new Date()
+) {
 
-    if (!birthday) {
+    if (!pet.created) {
 
-        return "Birthday unknown";
-
-    }
-
-
-    const birth =
-        new Date(birthday);
-
-    const now =
-        new Date();
-
-
-    let years =
-        now.getFullYear()
-        -
-        birth.getFullYear();
-
-
-    let months =
-        now.getMonth()
-        -
-        birth.getMonth();
-
-
-    if (
-        months < 0 ||
-        (
-            months === 0 &&
-            now.getDate() <
-            birth.getDate()
-        )
-    ) {
-
-        years--;
+        return 1;
 
     }
 
 
-    if (years > 0) {
-
-        return `${years} year${
-            years === 1 ? "" : "s"
-        } old`;
-
-    }
-
-
-    const totalMonths =
-
-        (
-            now.getFullYear()
-            -
-            birth.getFullYear()
-        ) * 12
-
-        +
-
-        (
-            now.getMonth()
-            -
-            birth.getMonth()
+    const created =
+        new Date(
+            pet.created
         );
 
 
-    return `${Math.max(
-        0,
-        totalMonths
-    )} month${
-        totalMonths === 1 ? "" : "s"
-    } old`;
-}
+    const startDate =
+        new Date(
+            created.getFullYear(),
+            created.getMonth(),
+            created.getDate()
+        );
 
 
-// =============================
-// CARE
-// =============================
-
-function markCare(button) {
-
-    button.innerHTML =
-        "✓ " +
-
-        button.innerHTML
-            .replace("🍗 ", "")
-            .replace("💧 ", "");
+    const currentDate =
+        new Date(
+            date.getFullYear(),
+            date.getMonth(),
+            date.getDate()
+        );
 
 
-    button.style.background =
-        "#ddfff2";
+    const difference =
+        currentDate.getTime() -
+        startDate.getTime();
 
 
-    showToast(
-        "🐾 Care recorded!"
-    );
-}
-
-
-// =============================
-// MOOD
-// =============================
-
-function setMood(mood) {
-
-    showToast(
-        `${mood} Mood recorded!`
-    );
-}
-
-
-// =============================
-// EMERGENCY
-// =============================
-
-function showEmergency(pet) {
-
-    alert(
-
-        `🚨 PET EMERGENCY\n\n` +
-
-        `${pet.name}\n` +
-
-        `${pet.species}\n` +
-
-        `Age: ${
-            getAge(
-                pet.birthday
+    const days =
+        Math.floor(
+            difference /
+            (
+                1000 *
+                60 *
+                60 *
+                24
             )
-        }\n` +
+        );
 
-        `Weight: ${
-            pet.weight ||
-            "Unknown"
-        } kg\n\n` +
 
-        `Allergies: ${
-            pet.allergies ||
-            "None recorded"
-        }\n\n` +
-
-        `Emergency veterinary contacts ` +
-        `will be added in a future version.`
-
+    return Math.max(
+        1,
+        days + 1
     );
 }
 
 
-// =============================
-// FORM RESET
-// =============================
+// ============================================================
+// TIMELINE STORAGE
+// ============================================================
 
-function clearForm() {
+function getTimelineKey(
+    petId
+) {
 
-    document
-        .getElementById(
-            "petName"
-        ).value = "";
-
-
-    document
-        .getElementById(
-            "petBreed"
-        ).value = "";
-
-
-    document
-        .getElementById(
-            "petBirthday"
-        ).value = "";
-
-
-    document
-        .getElementById(
-            "petSex"
-        ).value = "";
-
-
-    document
-        .getElementById(
-            "petWeight"
-        ).value = "";
-
-
-    document
-        .getElementById(
-            "petColor"
-        ).value = "";
-
-
-    document
-        .getElementById(
-            "petAllergies"
-        ).value = "";
-
-
-    document
-        .getElementById(
-            "petNotes"
-        ).value = "";
-
-
-    document
-        .getElementById(
-            "petPhoto"
-        ).value = "";
-
-
-    document
-        .getElementById(
-            "energy"
-        ).value = 50;
-
-
-    document
-        .getElementById(
-            "social"
-        ).value = 50;
-
-
-    document
-        .getElementById(
-            "talkative"
-        ).value = 50;
-
-
-    document
-        .getElementById(
-            "affection"
-        ).value = 50;
-
+    return `petPassportTimeline_${petId}`;
 }
 
 
-// =============================
-// TOAST
-// =============================
+function getTimelineLogs(
+    petId
+) {
 
-function showToast(message) {
-
-    const toast =
-        document.getElementById(
-            "toast"
-        );
+    if (!petId) return [];
 
 
-    if (!toast) return;
+    return JSON.parse(
+        localStorage.getItem(
+            getTimelineKey(
+                petId
+            )
+        )
+    ) || [];
+}
 
 
-    toast.textContent =
-        message;
+function saveTimelineLogs(
+    petId,
+    logs
+) {
 
+    localStorage.setItem(
 
-    toast.classList.add(
-        "show"
+        getTimelineKey(
+            petId
+        ),
+
+        JSON.stringify(
+            logs
+        )
     );
-
-
-    setTimeout(() => {
-
-        toast.classList.remove(
-            "show"
-        );
-
-    }, 2200);
-
 }
 
 
-// =============================
-// SECURITY / TEXT
-// =============================
+// ============================================================
+// ADD TIMELINE RECORD
+// ============================================================
 
-function escapeHTML(text) {
+function addTimelineLog(
+    petId,
+    data
+) {
 
-    return String(text)
+    if (!petId) return;
 
-        .replaceAll(
-            "&",
-            "&amp;"
-        )
 
-        .replaceAll(
-            "<",
-            "&lt;"
-        )
-
-        .replaceAll(
-            ">",
-            "&gt;"
-        )
-
-        .replaceAll(
-            '"',
-            "&quot;"
-        )
-
-        .replaceAll(
-            "'",
-            "&#039;"
+    const logs =
+        getTimelineLogs(
+            petId
         );
 
+
+    logs.push({
+
+        id:
+            Date.now() +
+            Math.random(),
+
+        timestamp:
+            new Date().toISOString(),
+
+        type:
+            data.type || "activity",
+
+        icon:
+            data.icon || "🐾",
+
+        title:
+            data.title || "Activity",
+
+        detail:
+            data.detail || ""
+
+    });
+
+
+    saveTimelineLogs(
+        petId,
+        logs
+    );
 }
 
 
-// =============================
-// START APP
-// =============================
+// ============================================================
+// TIMELINE RENDER
+// ============================================================
 
-renderPets();
+function renderTimeline(
+    pet
+) {
+
+    const logs =
+        getTimelineLogs(
+            pet.id
+        );
+
+
+    // No records yet
+    if (logs.length === 0) {
+
+        return `
+
+            <div class="timeline-empty">
+
+                <div class="empty-icon">
+                    🐾
+                </div>
+
+                <p>
+                    No activities recorded yet.
+                </p>
+
+                <small>
+                    Food, water, medication,
+                    bathroom and other records
+                    will appear here.
+                </small>
+
+            </div>
+
+        `;
+    }
+
+
+    // Sort newest first
+    const sorted =
+        [...logs].sort(
+            (a, b) =>
+                new Date(b.timestamp) -
+                new Date(a.timestamp)
+        );
+
+
+    // Group by calendar date
+    const groups = {};
+
+
+    sorted.forEach(log => {
+
+        const date =
+            new Date(
+                log.timestamp
+            );
+
+
+        const key =
+            getDateKey(
+                date
+            );
+
+
+        if (!groups[key]) {
+
+            groups[key] = [];
+
+        }
+
+
+        groups[key].push(
+            log
+        );
+
+    });
+
+
+    return Object.keys(groups)
+
+        .sort(
+            (a, b) =>
+                new Date(b) -
+                new Date(a)
+        )
+
+        .map(dateKey => {
+
+            const date =
+                new Date(
+                    dateKey +
+                    "T00:00:00"
+                );
+
+
+            const dayNumber =
+                getPetDayNumber(
+                    pet,
