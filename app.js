@@ -42,7 +42,6 @@ function openAddPet() {
 
 function showPet(id) {
 
-    // Remember which pet is currently open
     currentPetId = id;
 
     const pet = pets.find(
@@ -89,9 +88,68 @@ function openHealth() {
         return;
     }
 
-
     window.location.href =
         `health.html?pet=${currentPetId}`;
+}
+
+
+// =============================
+// OPEN FOOD PAGE
+// =============================
+
+function openFood() {
+
+    if (!currentPetId) {
+
+        showToast(
+            "🐾 Please select a pet first!"
+        );
+
+        return;
+    }
+
+    window.location.href =
+        `food.html?pet=${currentPetId}`;
+}
+
+
+// =============================
+// OPEN WATER PAGE
+// =============================
+
+function openWater() {
+
+    if (!currentPetId) {
+
+        showToast(
+            "🐾 Please select a pet first!"
+        );
+
+        return;
+    }
+
+    window.location.href =
+        `water.html?pet=${currentPetId}`;
+}
+
+
+// =============================
+// OPEN MEDICATION PAGE
+// =============================
+
+function openMedication() {
+
+    if (!currentPetId) {
+
+        showToast(
+            "🐾 Please select a pet first!"
+        );
+
+        return;
+    }
+
+    window.location.href =
+        `medication.html?pet=${currentPetId}`;
 }
 
 
@@ -472,6 +530,7 @@ function renderDashboard(pet) {
                     ${getAge(
                         pet.birthday
                     )}
+
                 </p>
 
             </div>
@@ -493,17 +552,25 @@ function renderDashboard(pet) {
 
                 <button
                     class="quick-button"
-                    onclick="markCare(this)"
+                    onclick="openFood()"
                 >
-                    🍗 Breakfast
+                    🍗 Food
                 </button>
 
 
                 <button
                     class="quick-button"
-                    onclick="markCare(this)"
+                    onclick="openWater()"
                 >
                     💧 Water
+                </button>
+
+
+                <button
+                    class="quick-button"
+                    onclick="openMedication()"
+                >
+                    💊 Medication
                 </button>
 
             </div>
@@ -722,6 +789,7 @@ function getAge(birthday) {
     )} month${
         totalMonths === 1 ? "" : "s"
     } old`;
+
 }
 
 
@@ -758,6 +826,7 @@ function setMood(mood) {
     showToast(
         `${mood} Mood recorded!`
     );
+
 }
 
 
@@ -795,6 +864,7 @@ function showEmergency(pet) {
         `will be added in a future version.`
 
     );
+
 }
 
 
