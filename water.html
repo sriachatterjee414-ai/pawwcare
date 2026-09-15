@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Water Tracker 🐾</title>
+
+    <link rel="stylesheet" href="water.css">
+</head>
+
+<body>
+
+<div class="page">
+
+    <button class="back-button" onclick="goBack()">
+        ← Back to Health
+    </button>
+
+    <header>
+        <div class="icon">💧</div>
+
+        <div>
+            <p>DAILY HEALTH</p>
+            <h1>Water Tracker</h1>
+            <span id="petName">🐾 My Pet</span>
+        </div>
+    </header>
+
+
+    <!-- DAILY TOTAL -->
+
+    <section class="card water-total-card">
+
+        <div class="water-circle">
+            <span id="waterTotal">0</span>
+            <small>ml</small>
+        </div>
+
+        <div class="water-info">
+            <h2>💧 Today's Water</h2>
+
+            <p>
+                <span id="waterProgressText">
+                    0 ml recorded
+                </span>
+            </p>
+
+            <div class="progress">
+                <div
+                    id="waterProgress"
+                    class="progress-bar"
+                ></div>
+            </div>
+
+            <small id="waterGoalText">
+                Daily goal: Not set
+            </small>
+        </div>
+
+    </section>
+
+
+    <!-- ADD WATER -->
+
+    <section class="card">
+
+        <h2>💧 Add Water</h2>
+
+        <label>Amount</label>
+
+        <div class="amount-row">
+
+            <input
+                id="waterAmount"
+                type="number"
+                min="1"
+                placeholder="250"
+            >
+
+            <span>ml</span>
+
+        </div>
+
+
+        <label>Time</label>
+
+        <input
+            id="waterTime"
+            type="time"
+        >
+
+
+        <button
+            class="blue-button"
+            onclick="addWater()"
+        >
+            ＋ Record Water
+        </button>
+
+    </section>
+
+
+    <!-- DAILY GOAL -->
+
+    <section class="card">
+
+        <h2>🎯 Daily Water Goal</h2>
+
+        <p>
+            Set a target to track your pet's daily intake.
+        </p>
+
+        <div class="amount-row">
+
+            <input
+                id="waterGoal"
+                type="number"
+                min="1"
+                placeholder="800"
+            >
+
+            <span>ml</span>
+
+        </div>
+
+        <button
+            class="pink-button"
+            onclick="saveWaterGoal()"
+        >
+            💾 Save Goal
+        </button>
+
+    </section>
+
+
+    <!-- REMINDER -->
+
+    <section class="card">
+
+        <h2>⏰ Water Reminder</h2>
+
+        <p>
+            Set a daily reminder for water.
+        </p>
+
+        <input
+            id="waterReminder"
+            type="time"
+        >
+
+        <button
+            class="blue-button"
+            onclick="saveWaterReminder()"
+        >
+            🔔 Save Reminder
+        </button>
+
+        <div id="waterReminderStatus"></div>
+
+    </section>
+
+
+    <!-- TODAY'S LOG -->
+
+    <section class="card">
+
+        <div class="section-title">
+
+            <h2>📋 Today's Water</h2>
+
+            <span id="totalBadge">
+                0 ml
+            </span>
+
+        </div>
+
+        <div id="waterList"></div>
+
+    </section>
+
+</div>
+
+
+<div id="toast"></div>
+
+<script src="water.js"></script>
+
+</body>
+</html>
