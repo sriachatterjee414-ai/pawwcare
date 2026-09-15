@@ -1,0 +1,389 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+
+    font-family: Arial, sans-serif;
+
+    background:
+        radial-gradient(
+            circle at top left,
+            #f3eaff,
+            transparent 35%
+        ),
+        radial-gradient(
+            circle at bottom right,
+            #ffeaf6,
+            transparent 35%
+        ),
+        #fcfaff;
+
+    color: #40334d;
+}
+
+.page {
+    width: min(900px, 92%);
+
+    margin: auto;
+
+    padding: 25px 0 70px;
+}
+
+.back-button {
+    border: none;
+
+    background: white;
+
+    padding: 12px 18px;
+
+    border-radius: 20px;
+
+    font-size: 15px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 5px 15px #e4dcec;
+}
+
+header {
+    margin: 25px 0;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 18px;
+}
+
+header .icon {
+    width: 75px;
+    height: 75px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    background: #e5d2ff;
+
+    border-radius: 25px;
+
+    font-size: 40px;
+}
+
+header p {
+    margin: 0;
+
+    font-size: 12px;
+
+    font-weight: bold;
+
+    letter-spacing: 2px;
+
+    color: #8855bd;
+}
+
+header h1 {
+    margin: 3px 0;
+
+    font-size: 32px;
+}
+
+header span {
+    color: #777;
+}
+
+.card {
+    background: white;
+
+    padding: 25px;
+
+    margin: 20px 0;
+
+    border-radius: 28px;
+
+    box-shadow:
+        0 8px 25px rgba(100, 70, 130, 0.12);
+}
+
+.card h2 {
+    margin-top: 0;
+}
+
+label {
+    display: block;
+
+    margin-top: 18px;
+
+    margin-bottom: 7px;
+
+    font-weight: bold;
+}
+
+input,
+select {
+    width: 100%;
+
+    padding: 14px;
+
+    border: 2px solid #eadff2;
+
+    border-radius: 15px;
+
+    font-size: 16px;
+
+    font-family: inherit;
+
+    outline: none;
+
+    background: white;
+}
+
+input:focus,
+select:focus {
+    border-color: #b17add;
+}
+
+.purple-button {
+    width: 100%;
+
+    border: none;
+
+    margin-top: 22px;
+
+    padding: 15px;
+
+    border-radius: 18px;
+
+    font-size: 16px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    background: #a56bd1;
+
+    color: white;
+}
+
+.section-title {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+}
+
+.section-title span {
+    background: #ead8ff;
+
+    padding: 8px 13px;
+
+    border-radius: 15px;
+
+    font-weight: bold;
+
+    color: #7544a0;
+}
+
+.medication-item {
+    margin-top: 15px;
+
+    padding: 20px;
+
+    border-radius: 22px;
+
+    background: #faf6ff;
+
+    border-left: 6px solid #b17add;
+}
+
+.medication-header {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: flex-start;
+
+    gap: 10px;
+}
+
+.medication-name {
+    font-size: 19px;
+
+    font-weight: bold;
+}
+
+.medication-details {
+    margin-top: 10px;
+
+    color: #666;
+
+    line-height: 1.7;
+}
+
+.active-pill {
+    background: #dff9eb;
+
+    color: #277550;
+
+    padding: 6px 10px;
+
+    border-radius: 12px;
+
+    font-size: 12px;
+
+    font-weight: bold;
+}
+
+.taken-button {
+    width: 100%;
+
+    border: none;
+
+    margin-top: 15px;
+
+    padding: 12px;
+
+    border-radius: 15px;
+
+    background: #d9f8e8;
+
+    color: #287153;
+
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+.delete-button {
+    border: none;
+
+    background: #ffe1e1;
+
+    padding: 9px 12px;
+
+    border-radius: 12px;
+
+    cursor: pointer;
+
+    margin-top: 10px;
+}
+
+.history-item {
+    padding: 14px;
+
+    margin-top: 10px;
+
+    background: #f8f4fc;
+
+    border-radius: 15px;
+
+    font-size: 14px;
+}
+
+.alarm-box {
+    background: #fff0f5;
+
+    border: 4px solid #ff82bd;
+
+    padding: 30px;
+
+    margin: 20px 0;
+
+    border-radius: 28px;
+
+    text-align: center;
+
+    box-shadow:
+        0 10px 35px rgba(255, 100, 170, 0.25);
+
+    animation: alarmPulse 0.8s infinite alternate;
+}
+
+.alarm-icon {
+    font-size: 55px;
+}
+
+.alarm-box h2 {
+    color: #c6387e;
+}
+
+.stop-button {
+    width: 100%;
+
+    padding: 16px;
+
+    border: none;
+
+    border-radius: 18px;
+
+    background: #e53935;
+
+    color: white;
+
+    font-size: 17px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+.hidden {
+    display: none;
+}
+
+@keyframes alarmPulse {
+
+    from {
+        transform: scale(1);
+    }
+
+    to {
+        transform: scale(1.02);
+    }
+
+}
+
+#toast {
+    position: fixed;
+
+    bottom: 25px;
+
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    background: #40334d;
+
+    color: white;
+
+    padding: 14px 22px;
+
+    border-radius: 20px;
+
+    opacity: 0;
+
+    pointer-events: none;
+
+    transition: 0.3s;
+
+    z-index: 100;
+}
+
+#toast.show {
+    opacity: 1;
+}
+
+@media (max-width: 600px) {
+
+    .medication-header {
+        flex-direction: column;
+    }
+
+}
