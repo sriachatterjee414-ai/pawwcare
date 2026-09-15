@@ -1,0 +1,369 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+
+    font-family: Arial, sans-serif;
+
+    background:
+        radial-gradient(
+            circle at top left,
+            #e8f8ff,
+            transparent 35%
+        ),
+        radial-gradient(
+            circle at bottom right,
+            #fff0fa,
+            transparent 35%
+        ),
+        #faffff;
+
+    color: #293d4a;
+}
+
+.page {
+    width: min(900px, 92%);
+    margin: auto;
+
+    padding: 25px 0 60px;
+}
+
+.back-button {
+    border: none;
+
+    background: white;
+
+    padding: 12px 18px;
+
+    border-radius: 20px;
+
+    font-size: 15px;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 5px 15px #dceaf0;
+}
+
+header {
+    margin: 25px 0;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 18px;
+}
+
+header .icon {
+    width: 75px;
+    height: 75px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #ccefff;
+
+    border-radius: 25px;
+
+    font-size: 40px;
+}
+
+header p {
+    margin: 0;
+
+    font-size: 12px;
+
+    font-weight: bold;
+
+    letter-spacing: 2px;
+
+    color: #329dd0;
+}
+
+header h1 {
+    margin: 3px 0;
+
+    font-size: 32px;
+}
+
+header span {
+    color: #777;
+}
+
+.card {
+    background: white;
+
+    padding: 25px;
+
+    margin: 20px 0;
+
+    border-radius: 28px;
+
+    box-shadow:
+        0 8px 25px rgba(70, 130, 160, 0.12);
+}
+
+.card h2 {
+    margin-top: 0;
+}
+
+.water-total-card {
+    display: flex;
+
+    align-items: center;
+
+    gap: 25px;
+}
+
+.water-circle {
+    min-width: 150px;
+    height: 150px;
+
+    border-radius: 50%;
+
+    background: #d9f4ff;
+
+    border: 8px solid #91dbfa;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    color: #2698ca;
+}
+
+.water-circle span {
+    font-size: 34px;
+
+    font-weight: bold;
+}
+
+.water-circle small {
+    font-size: 15px;
+}
+
+.water-info {
+    flex: 1;
+}
+
+.water-info h2 {
+    margin-bottom: 5px;
+}
+
+.progress {
+    width: 100%;
+
+    height: 15px;
+
+    background: #e8f2f5;
+
+    border-radius: 20px;
+
+    overflow: hidden;
+
+    margin: 15px 0;
+}
+
+.progress-bar {
+    height: 100%;
+
+    width: 0%;
+
+    background: #61c8f4;
+
+    border-radius: 20px;
+
+    transition: width 0.4s;
+}
+
+label {
+    display: block;
+
+    margin-top: 18px;
+    margin-bottom: 7px;
+
+    font-weight: bold;
+}
+
+input {
+    width: 100%;
+
+    padding: 14px;
+
+    border: 2px solid #dcecf2;
+
+    border-radius: 15px;
+
+    font-size: 16px;
+
+    outline: none;
+}
+
+input:focus {
+    border-color: #65c8f4;
+}
+
+.amount-row {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+}
+
+.amount-row input {
+    flex: 1;
+}
+
+.amount-row span {
+    font-weight: bold;
+}
+
+.blue-button,
+.pink-button {
+    width: 100%;
+
+    border: none;
+
+    margin-top: 20px;
+
+    padding: 15px;
+
+    border-radius: 18px;
+
+    font-size: 16px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+.blue-button {
+    background: #68c9f5;
+
+    color: white;
+}
+
+.pink-button {
+    background: #ff82bd;
+
+    color: white;
+}
+
+.section-title {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+}
+
+.section-title span {
+    background: #d9f4ff;
+
+    padding: 8px 13px;
+
+    border-radius: 15px;
+
+    font-weight: bold;
+
+    color: #258db9;
+}
+
+.water-item {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    background: #f5fcff;
+
+    padding: 15px;
+
+    margin-top: 12px;
+
+    border-radius: 18px;
+}
+
+.water-item strong {
+    display: block;
+}
+
+.water-item small {
+    color: #777;
+}
+
+.delete-button {
+    border: none;
+
+    background: #ffe1e1;
+
+    padding: 9px 12px;
+
+    border-radius: 12px;
+
+    cursor: pointer;
+}
+
+#waterReminderStatus {
+    margin-top: 15px;
+
+    padding: 12px;
+
+    border-radius: 15px;
+
+    background: #edfff7;
+
+    color: #31805f;
+}
+
+#toast {
+    position: fixed;
+
+    bottom: 25px;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    background: #293d4a;
+
+    color: white;
+
+    padding: 14px 22px;
+
+    border-radius: 20px;
+
+    opacity: 0;
+
+    pointer-events: none;
+
+    transition: 0.3s;
+
+    z-index: 100;
+}
+
+#toast.show {
+    opacity: 1;
+}
+
+@media (max-width: 600px) {
+
+    .water-total-card {
+        flex-direction: column;
+
+        text-align: center;
+    }
+
+    .water-info {
+        width: 100%;
+    }
+}
