@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Pet Passport · Health 🩺</title>
+
+    <link
+        rel="stylesheet"
+        href="health.css"
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&family=Nunito:wght@400;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+</head>
+
+
+<body>
+
+<header class="health-header">
+
+    <button
+        class="back-btn"
+        onclick="goBack()"
+    >
+        ← Pet Passport
+    </button>
+
+
+    <div class="health-title">
+
+        <div class="health-icon">
+            🩺
+        </div>
+
+        <div>
+
+            <p>MEDICAL RECORDS</p>
+
+            <h1>
+                <span id="petName">Pet</span>'s Health
+            </h1>
+
+        </div>
+
+    </div>
+
+</header>
+
+
+
+<main>
+
+
+    <!-- PET SUMMARY -->
+
+    <section class="pet-summary">
+
+        <div
+            id="petPhoto"
+            class="summary-photo"
+        >
+            🐾
+        </div>
+
+
+        <div>
+
+            <span class="mini-label">
+                PET PASSPORT
+            </span>
+
+            <h2 id="petSummaryName">
+                Your Pet
+            </h2>
+
+            <p id="petSummaryInfo">
+                Medical history
+            </p>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- QUICK ACTIONS -->
+
+    <section class="quick-actions">
+
+        <button
+            onclick="openMedicalForm()"
+            class="action pink"
+        >
+            🩺
+            <span>
+                Vet Visit
+            </span>
+        </button>
+
+
+        <button
+            onclick="openVaccinationForm()"
+            class="action yellow"
+        >
+            💉
+            <span>
+                Vaccination
+            </span>
+        </button>
+
+    </section>
+
+
+
+    <!-- MEDICAL FORM -->
+
+    <section
+        id="medicalForm"
+        class="form-section hidden"
+    >
+
+        <div class="section-top">
+
+            <div>
+
+                <span class="mini-label">
+                    NEW RECORD
+                </span>
+
+                <h2>
+                    🩺 Vet Visit
+                </h2>
+
+            </div>
+
+            <button
+                onclick="closeForms()"
+                class="close-btn"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <label>
+            Visit date *
+        </label>
+
+        <input
+            id="visitDate"
+            type="date"
+        >
+
+
+        <label>
+            Veterinarian
+        </label>
+
+        <input
+            id="vetName"
+            type="text"
+            placeholder="Dr. Sarah..."
+        >
+
+
+        <label>
+            Reason for visit
+        </label>
+
+        <input
+            id="visitReason"
+            type="text"
+            placeholder="General checkup..."
+        >
+
+
+        <label>
+            Blood test result
+        </label>
+
+        <input
+            id="bloodTest"
+            type="file"
+            accept=".pdf,.jpg,.jpeg,.png"
+        >
+
+
+        <label>
+            Prescription
+        </label>
+
+        <input
+            id="prescription"
+            type="file"
+            accept=".pdf,.jpg,.jpeg,.png"
+        >
+
+
+        <label>
+            Previous report
+        </label>
+
+        <input
+            id="previousReport"
+            type="file"
+            accept=".pdf,.jpg,.jpeg,.png"
+        >
+
+
+        <label>
+            Notes
+        </label>
+
+        <textarea
+            id="visitNotes"
+            placeholder="What happened during the visit?"
+        ></textarea>
+
+
+        <button
+            class="save-btn"
+            onclick="saveMedicalRecord()"
+        >
+            💗 Save Medical Record
+        </button>
+
+    </section>
+
+
+
+    <!-- VACCINATION FORM -->
+
+    <section
+        id="vaccinationForm"
+        class="form-section hidden"
+    >
+
+        <div class="section-top">
+
+            <div>
+
+                <span class="mini-label">
+                    NEW RECORD
+                </span>
+
+                <h2>
+                    💉 Vaccination
+                </h2>
+
+            </div>
+
+            <button
+                onclick="closeForms()"
+                class="close-btn"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <label>
+            Vaccine *
+        </label>
+
+        <input
+            id="vaccineName"
+            type="text"
+            placeholder="Rabies..."
+        >
+
+
+        <label>
+            Date given *
+        </label>
+
+        <input
+            id="vaccineDate"
+            type="date"
+        >
+
+
+        <label>
+            Next due date
+        </label>
+
+        <input
+            id="nextVaccineDate"
+            type="date"
+        >
+
+
+        <label>
+            Veterinarian
+        </label>
+
+        <input
+            id="vaccineVet"
+            type="text"
+            placeholder="Dr. Sarah..."
+        >
+
+
+        <label>
+            Notes
+        </label>
+
+        <textarea
+            id="vaccineNotes"
+            placeholder="Optional notes..."
+        ></textarea>
+
+
+        <button
+            class="save-btn"
+            onclick="saveVaccination()"
+        >
+            💉 Save Vaccination
+        </button>
+
+    </section>
+
+
+
+    <!-- MEDICAL TIMELINE -->
+
+    <section class="timeline-section">
+
+        <div class="section-heading">
+
+            <div>
+
+                <span class="mini-label">
+                    HEALTH HISTORY
+                </span>
+
+                <h2>
+                    Medical Timeline
+                </h2>
+
+            </div>
+
+        </div>
+
+
+        <div id="medicalTimeline">
+
+            <div class="empty">
+
+                <div>
+                    🩺
+                </div>
+
+                <h3>
+                    No medical records yet
+                </h3>
+
+                <p>
+                    Your pet's health journey
+                    will appear here.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+</main>
+
+
+
+<div
+    id="toast"
+    class="toast"
+></div>
+
+
+<script src="health.js"></script>
+
+</body>
+
+</html>
