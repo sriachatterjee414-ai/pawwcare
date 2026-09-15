@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Pet Passport 🐾</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&family=Nunito:wght@400;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+</head>
+
+<body>
+
+<header class="topbar">
+
+    <div class="logo">
+        <div class="logo-paw">🐾</div>
+
+        <div>
+            <h1>Pet Passport</h1>
+            <span>Your pet's little universe ✨</span>
+        </div>
+    </div>
+
+    <button class="add-btn" onclick="openAddPet()">
+        ＋ Add Pet
+    </button>
+
+</header>
+
+
+<main>
+
+    <!-- HOME -->
+
+    <section id="homePage" class="page">
+
+        <div class="hero">
+
+            <div>
+                <p class="small-title">WELCOME BACK 💗</p>
+
+                <h2>
+                    Every pet has<br>
+                    a story worth keeping.
+                </h2>
+
+                <p class="hero-text">
+                    Keep their health, habits, memories and
+                    everyday little moments together.
+                </p>
+
+                <button class="pink-button" onclick="openAddPet()">
+                    🐾 Add your first pet
+                </button>
+            </div>
+
+            <div class="hero-animals">
+                <span>🐱</span>
+                <span>🐶</span>
+                <span>🐾</span>
+            </div>
+
+        </div>
+
+
+        <div class="section-heading">
+
+            <div>
+                <p class="small-title">MY PETS</p>
+                <h2>My little family 🏠</h2>
+            </div>
+
+        </div>
+
+
+        <div id="petList" class="pet-grid"></div>
+
+    </section>
+
+
+
+    <!-- PET DASHBOARD -->
+
+    <section id="petPage" class="page hidden">
+
+        <button class="back-button" onclick="showHome()">
+            ← Back to my pets
+        </button>
+
+        <div id="petDashboard"></div>
+
+    </section>
+
+
+
+    <!-- ADD PET -->
+
+    <section id="addPetPage" class="page hidden">
+
+        <button class="back-button" onclick="showHome()">
+            ← Back
+        </button>
+
+        <div class="form-card">
+
+            <div class="form-title">
+                <span>🐾</span>
+
+                <div>
+                    <p class="small-title">NEW FAMILY MEMBER</p>
+                    <h2>Tell us about them!</h2>
+                </div>
+            </div>
+
+
+            <label>Pet type</label>
+
+            <div class="choice-row">
+
+                <button
+                    class="choice active"
+                    id="dogChoice"
+                    onclick="chooseSpecies('Dog')"
+                >
+                    🐶 Dog
+                </button>
+
+                <button
+                    class="choice"
+                    id="catChoice"
+                    onclick="chooseSpecies('Cat')"
+                >
+                    🐱 Cat
+                </button>
+
+            </div>
+
+
+            <label>Name *</label>
+
+            <input
+                id="petName"
+                type="text"
+                placeholder="Mochi..."
+            >
+
+
+            <label>Breed</label>
+
+            <input
+                id="petBreed"
+                type="text"
+                placeholder="Golden Retriever..."
+            >
+
+
+            <label>Birthday</label>
+
+            <input
+                id="petBirthday"
+                type="date"
+            >
+
+
+            <div class="two-columns">
+
+                <div>
+                    <label>Sex</label>
+
+                    <select id="petSex">
+                        <option value="">Choose...</option>
+                        <option>Female</option>
+                        <option>Male</option>
+                    </select>
+                </div>
+
+
+                <div>
+                    <label>Weight (kg)</label>
+
+                    <input
+                        id="petWeight"
+                        type="number"
+                        step="0.1"
+                        placeholder="4.8"
+                    >
+                </div>
+
+            </div>
+
+
+            <label>Colour / pattern</label>
+
+            <input
+                id="petColor"
+                type="text"
+                placeholder="Orange tabby..."
+            >
+
+
+            <label>Allergies</label>
+
+            <input
+                id="petAllergies"
+                type="text"
+                placeholder="None..."
+            >
+
+
+            <label>Important notes</label>
+
+            <textarea
+                id="petNotes"
+                placeholder="Anything important about your pet..."
+            ></textarea>
+
+
+            <label>Pet photo</label>
+
+            <input
+                id="petPhoto"
+                type="file"
+                accept="image/*"
+            >
+
+
+            <div class="personality-box">
+
+                <h3>✨ Pet Personality</h3>
+
+                <div class="personality">
+
+                    <div>
+                        <span>Energy 😴</span>
+                        <span>⚡</span>
+                    </div>
+
+                    <input
+                        id="energy"
+                        type="range"
+                        min="0"
+                        max="100"
+                        value="50"
+                    >
+
+                </div>
+
+
+                <div class="personality">
+
+                    <div>
+                        <span>Social 🙈</span>
+                        <span>🥰</span>
+                    </div>
+
+                    <input
+                        id="social"
+                        type="range"
+                        min="0"
+                        max="100"
+                        value="50"
+                    >
+
+                </div>
+
+
+                <div class="personality">
+
+                    <div>
+                        <span>Talkative 🤐</span>
+                        <span>🗣️</span>
+                    </div>
+
+                    <input
+                        id="talkative"
+                        type="range"
+                        min="0"
+                        max="100"
+                        value="50"
+                    >
+
+                </div>
+
+
+                <div class="personality">
+
+                    <div>
+                        <span>Affection 🧊</span>
+                        <span>❤️</span>
+                    </div>
+
+                    <input
+                        id="affection"
+                        type="range"
+                        min="0"
+                        max="100"
+                        value="50"
+                    >
+
+                </div>
+
+            </div>
+
+
+            <button
+                class="save-button"
+                onclick="savePet()"
+            >
+                🐾 Create Pet Passport
+            </button>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+
+<!-- BOTTOM NAVIGATION -->
+
+<nav class="bottom-nav">
+
+    <button onclick="showHome()">
+        🏠
+        <span>Home</span>
+    </button>
+
+    <button onclick="openAddPet()">
+        🐾
+        <span>Add Pet</span>
+    </button>
+
+    <button onclick="showComingSoon()">
+        ❤️
+        <span>Memories</span>
+    </button>
+
+    <button onclick="showComingSoon()">
+        ⚙️
+        <span>Settings</span>
+    </button>
+
+</nav>
+
+
+<div id="toast" class="toast"></div>
+
+
+<script src="app.js"></script>
+
+</body>
+</html>
