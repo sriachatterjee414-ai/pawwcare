@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Pet Timeline</title>
+
+    <link rel="stylesheet" href="timeline.css">
+</head>
+
+<body>
+
+    <header class="timeline-header">
+
+        <button class="back-button" onclick="goBack()">
+            ←
+        </button>
+
+        <div>
+            <h1>📖 Life Timeline</h1>
+            <p id="petSubtitle">Your pet's journey</p>
+        </div>
+
+    </header>
+
+
+    <main class="timeline-page">
+
+        <!-- PET INTRO -->
+
+        <section class="pet-intro">
+
+            <div id="petPhoto" class="pet-timeline-photo">
+                🐾
+            </div>
+
+            <div>
+                <h2 id="petName">Pet</h2>
+                <p id="petInfo"></p>
+            </div>
+
+        </section>
+
+
+        <!-- TIMELINE -->
+
+        <section class="timeline-container">
+
+            <div id="timeline">
+                <p class="loading">
+                    Loading your pet's timeline... 🐾
+                </p>
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <script src="timeline.js"></script>
+
+</body>
+</html>
