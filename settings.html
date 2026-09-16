@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Pet Settings ⚙️</title>
+
+    <link
+        rel="stylesheet"
+        href="settings.css"
+    >
+
+</head>
+
+
+<body>
+
+    <main class="settings-page">
+
+
+        <!-- HEADER -->
+
+        <header class="settings-header">
+
+            <button
+                class="back-button"
+                onclick="goBack()"
+            >
+                ←
+            </button>
+
+            <div>
+
+                <p class="small-title">
+                    PET PASSPORT
+                </p>
+
+                <h1>
+                    ⚙️ Pet Settings
+                </h1>
+
+            </div>
+
+        </header>
+
+
+
+        <!-- PET PREVIEW -->
+
+        <section class="pet-preview">
+
+            <div
+                id="previewPhoto"
+                class="preview-photo"
+            >
+                🐾
+            </div>
+
+            <div>
+
+                <h2 id="previewName">
+                    My Pet
+                </h2>
+
+                <p id="previewSpecies">
+                    🐾 Pet
+                </p>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- PROFILE PHOTO -->
+
+        <section class="settings-card">
+
+            <h2>📸 Profile Picture</h2>
+
+            <p class="description">
+                Change your pet's passport photo.
+            </p>
+
+            <div class="photo-section">
+
+                <div
+                    id="largePhotoPreview"
+                    class="large-photo"
+                >
+                    🐾
+                </div>
+
+                <div>
+
+                    <label
+                        for="petPhoto"
+                        class="upload-button"
+                    >
+                        📷 Change Photo
+                    </label>
+
+                    <input
+                        id="petPhoto"
+                        type="file"
+                        accept="image/*"
+                        hidden
+                    >
+
+                    <button
+                        id="removePhotoButton"
+                        class="remove-photo"
+                        type="button"
+                        onclick="removePhoto()"
+                    >
+                        🗑️ Remove Photo
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- BASIC INFORMATION -->
+
+        <section class="settings-card">
+
+            <h2>🐾 Basic Information</h2>
+
+
+            <label for="petName">
+                Name
+            </label>
+
+            <input
+                id="petName"
+                type="text"
+                placeholder="Mochi"
+            >
+
+
+            <label for="petBreed">
+                Breed
+            </label>
+
+            <input
+                id="petBreed"
+                type="text"
+                placeholder="Golden Retriever"
+            >
+
+
+            <label for="petBirthday">
+                Birthday
+            </label>
+
+            <input
+                id="petBirthday"
+                type="date"
+            >
+
+
+            <div class="two-columns">
+
+                <div>
+
+                    <label for="petSex">
+                        Sex
+                    </label>
+
+                    <select id="petSex">
+
+                        <option value="">
+                            Choose...
+                        </option>
+
+                        <option value="Female">
+                            Female
+                        </option>
+
+                        <option value="Male">
+                            Male
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div>
+
+                    <label for="petWeight">
+                        Weight (kg)
+                    </label>
+
+                    <input
+                        id="petWeight"
+                        type="number"
+                        step="0.1"
+                        min="0"
+                        placeholder="4.8"
+                    >
+
+                </div>
+
+            </div>
+
+
+            <label for="petColor">
+                Colour / Pattern
+            </label>
+
+            <input
+                id="petColor"
+                type="text"
+                placeholder="Orange tabby..."
+            >
+
+        </section>
+
+
+
+        <!-- HEALTH -->
+
+        <section class="settings-card">
+
+            <h2>💗 Health Information</h2>
+
+
+            <label for="petAllergies">
+                Allergies
+            </label>
+
+            <input
+                id="petAllergies"
+                type="text"
+                placeholder="None..."
+            >
+
+
+            <label for="petNotes">
+                Important Notes
+            </label>
+
+            <textarea
+                id="petNotes"
+                placeholder="Anything important about your pet..."
+            ></textarea>
+
+        </section>
+
+
+
+        <!-- PERSONALITY -->
+
+        <section class="settings-card">
+
+            <h2>✨ Personality</h2>
+
+            <p class="description">
+                Update your pet's personality whenever it changes.
+            </p>
+
+
+            <div class="personality-row">
+
+                <div class="personality-label">
+
+                    <span>
+                        Energy 😴
+                    </span>
+
+                    <span>
+                        ⚡
+                    </span>
+
+                </div>
+
+                <input
+                    id="energy"
+                    type="range"
+                    min="0"
+                    max="100"
+                    value="50"
+                >
+
+            </div>
+
+
+            <div class="personality-row">
+
+                <div class="personality-label">
+
+                    <span>
+                        Social 🙈
+                    </span>
+
+                    <span>
+                        🥰
+                    </span>
+
+                </div>
+
+                <input
+                    id="social"
+                    type="range"
+                    min="0"
+                    max="100"
+                    value="50"
+                >
+
+            </div>
+
+
+            <div class="personality-row">
+
+                <div class="personality-label">
+
+                    <span>
+                        Talkative 🤐
+                    </span>
+
+                    <span>
+                        🗣️
+                    </span>
+
+                </div>
+
+                <input
+                    id="talkative"
+                    type="range"
+                    min="0"
+                    max="100"
+                    value="50"
+                >
+
+            </div>
+
+
+            <div class="personality-row">
+
+                <div class="personality-label">
+
+                    <span>
+                        Affection 🧊
+                    </span>
+
+                    <span>
+                        ❤️
+                    </span>
+
+                </div>
+
+                <input
+                    id="affection"
+                    type="range"
+                    min="0"
+                    max="100"
+                    value="50"
+                >
+
+            </div>
+
+        </section>
+
+
+
+        <!-- SAVE -->
+
+        <button
+            class="save-button"
+            onclick="saveChanges()"
+        >
+            💗 Save Changes
+        </button>
+
+
+
+        <!-- DELETE -->
+
+        <section class="danger-card">
+
+            <h2>⚠️ Danger Zone</h2>
+
+            <p>
+                Permanently remove this pet from
+                Pet Passport.
+            </p>
+
+            <button
+                class="delete-button"
+                onclick="deletePet()"
+            >
+                🗑️ Delete Pet
+            </button>
+
+        </section>
+
+
+    </main>
+
+
+    <div
+        id="toast"
+        class="toast"
+    ></div>
+
+
+    <script src="settings.js"></script>
+
+</body>
+
+</html>
