@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Pet Memories 📖</title>
+
+    <link
+        rel="stylesheet"
+        href="memory.css"
+    >
+
+</head>
+
+
+<body>
+
+<main class="memory-page">
+
+
+    <!-- HEADER -->
+
+    <header class="memory-header">
+
+        <button
+            class="back-button"
+            onclick="goBack()"
+        >
+            ←
+        </button>
+
+        <div>
+
+            <p class="small-title">
+                PET PASSPORT
+            </p>
+
+            <h1>
+                📖 Memories
+            </h1>
+
+            <p id="petSubtitle">
+                Little moments worth keeping
+            </p>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- PET -->
+
+    <section class="pet-strip">
+
+        <div
+            id="petPhoto"
+            class="pet-photo"
+        >
+            🐾
+        </div>
+
+        <div>
+
+            <strong id="petName">
+                My Pet
+            </strong>
+
+            <span>
+                A scrapbook of their life 💗
+            </span>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- CREATE MEMORY -->
+
+    <section class="memory-card">
+
+        <div class="card-title">
+
+            <span>
+                ✨
+            </span>
+
+            <div>
+
+                <h2>
+                    Create a Memory
+                </h2>
+
+                <p>
+                    Keep one little moment forever.
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- TITLE -->
+
+        <label for="memoryTitle">
+            Memory title
+        </label>
+
+        <input
+            id="memoryTitle"
+            type="text"
+            placeholder="The day Mochi met snow..."
+        >
+
+
+
+        <!-- TYPE -->
+
+        <label for="memoryType">
+            Memory type
+        </label>
+
+        <select id="memoryType">
+
+            <option value="Everyday">
+                🌸 Everyday
+            </option>
+
+            <option value="Funny">
+                😂 Funny
+            </option>
+
+            <option value="Adventure">
+                🌎 Adventure
+            </option>
+
+            <option value="Birthday">
+                🎂 Birthday
+            </option>
+
+            <option value="Milestone">
+                ⭐ Milestone
+            </option>
+
+            <option value="First">
+                💗 First time
+            </option>
+
+            <option value="Special">
+                ✨ Special
+            </option>
+
+        </select>
+
+
+
+        <!-- DATE -->
+
+        <label for="memoryDate">
+            Date
+        </label>
+
+        <input
+            id="memoryDate"
+            type="date"
+        >
+
+
+
+        <!-- PHOTO -->
+
+        <div class="tool-section">
+
+            <h3>
+                📸 Main Photo
+            </h3>
+
+            <label
+                for="mainPhoto"
+                class="upload-button"
+            >
+                📷 Add Pet Photo
+            </label>
+
+            <input
+                id="mainPhoto"
+                type="file"
+                accept="image/*"
+                hidden
+            >
+
+            <div
+                id="mainPhotoPreview"
+                class="main-photo-preview"
+            ></div>
+
+        </div>
+
+
+
+        <!-- NOTE -->
+
+        <div class="tool-section">
+
+            <h3>
+                📝 Memory Note
+            </h3>
+
+            <textarea
+                id="memoryNote"
+                placeholder="Write about this little moment..."
+            ></textarea>
+
+        </div>
+
+
+
+        <!-- DRAWING -->
+
+        <div class="tool-section">
+
+            <div class="tool-heading">
+
+                <div>
+
+                    <h3>
+                        🎨 Draw Something
+                    </h3>
+
+                    <p>
+                        Draw with your finger or mouse.
+                    </p>
+
+                </div>
+
+                <button
+                    class="clear-button"
+                    onclick="clearCanvas()"
+                >
+                    🗑️ Clear
+                </button>
+
+            </div>
+
+
+            <div class="drawing-tools">
+
+                <button
+                    onclick="setTool('pen')"
+                    class="tool-button active"
+                    id="penTool"
+                >
+                    ✏️ Pen
+                </button>
+
+                <button
+                    onclick="setTool('eraser')"
+                    class="tool-button"
+                    id="eraserTool"
+                >
+                    🧽 Eraser
+                </button>
+
+                <label class="size-control">
+
+                    Size
+
+                    <input
+                        id="brushSize"
+                        type="range"
+                        min="1"
+                        max="30"
+                        value="5"
+                    >
+
+                </label>
+
+            </div>
+
+
+            <div class="canvas-wrapper">
+
+                <canvas
+                    id="drawingCanvas"
+                ></canvas>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- IMPORTED IMAGE -->
+
+        <div class="tool-section">
+
+            <h3>
+                🖼️ Add Another Picture
+            </h3>
+
+            <label
+                for="extraPhoto"
+                class="upload-button blue"
+            >
+                🖼️ Import Picture
+            </label>
+
+            <input
+                id="extraPhoto"
+                type="file"
+                accept="image/*"
+                hidden
+            >
+
+            <div
+                id="extraPhotoPreview"
+                class="extra-photo-preview"
+            ></div>
+
+        </div>
+
+
+
+        <!-- STICKERS -->
+
+        <div class="tool-section">
+
+            <h3>
+                ⭐ Stickers
+            </h3>
+
+            <p class="hint">
+                Tap a sticker to add it to your memory.
+            </p>
+
+
+            <div class="sticker-row">
+
+                <button onclick="addSticker('🐾')">
+                    🐾
+                </button>
+
+                <button onclick="addSticker('❤️')">
+                    ❤️
+                </button>
+
+                <button onclick="addSticker('⭐')">
+                    ⭐
+                </button>
+
+                <button onclick="addSticker('✨')">
+                    ✨
+                </button>
+
+                <button onclick="addSticker('🎀')">
+                    🎀
+                </button>
+
+                <button onclick="addSticker('🦴')">
+                    🦴
+                </button>
+
+                <button onclick="addSticker('🌸')">
+                    🌸
+                </button>
+
+                <button onclick="addSticker('😂')">
+                    😂
+                </button>
+
+            </div>
+
+
+            <div
+                id="stickerCanvas"
+                class="sticker-canvas"
+            ></div>
+
+        </div>
+
+
+
+        <!-- SOUND -->
+
+        <div class="tool-section">
+
+            <h3>
+                🔊 Sound Note
+            </h3>
+
+            <p class="hint">
+                Record a little sound or message.
+            </p>
+
+
+            <div class="record-controls">
+
+                <button
+                    id="recordButton"
+                    class="record-button"
+                    onclick="toggleRecording()"
+                >
+                    🔴 Start Recording
+                </button>
+
+                <span id="recordStatus">
+                    Not recording
+                </span>
+
+            </div>
+
+
+            <audio
+                id="audioPreview"
+                controls
+                hidden
+            ></audio>
+
+        </div>
+
+
+
+        <!-- SAVE -->
+
+        <button
+            class="save-memory-button"
+            onclick="saveMemory()"
+        >
+            💗 Save This Memory
+        </button>
+
+    </section>
+
+
+
+    <!-- SAVED MEMORIES -->
+
+    <section class="saved-section">
+
+        <div class="saved-heading">
+
+            <div>
+
+                <p class="small-title">
+                    YOUR SCRAPBOOK
+                </p>
+
+                <h2>
+                    💗 Saved Memories
+                </h2>
+
+            </div>
+
+            <span id="memoryCount">
+                0
+            </span>
+
+        </div>
+
+
+        <div id="memoryList"></div>
+
+    </section>
+
+
+</main>
+
+
+<div
+    id="toast"
+    class="toast"
+></div>
+
+
+<script src="memory.js"></script>
+
+</body>
+
+</html>
