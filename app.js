@@ -72,7 +72,24 @@ function showComingSoon() {
     );
 }
 
+// =============================
+// OPEN MEMORIES
+// =============================
 
+function openMemories() {
+
+    if (!currentPetId) {
+
+        showToast(
+            "🐾 Please select a pet first!"
+        );
+
+        return;
+    }
+
+    window.location.href =
+        `memory.html?pet=${currentPetId}`;
+}
 // =============================
 // OPEN HEALTH PAGE
 // =============================
@@ -738,27 +755,25 @@ function renderDashboard(pet) {
 
             <!-- MEMORIES -->
 
-            <div class="info-box">
+<div class="info-box">
 
-                <h3>
-                    📸 Memories
-                </h3>
+    <h3>
+        📸 Memories
+    </h3>
 
+    <p>
+        Save the little moments
+        that make them special.
+    </p>
 
-                <p>
-                    Save the little moments
-                    that make them special.
-                </p>
+    <button
+        class="quick-button"
+        onclick="openMemories()"
+    >
+        ＋ Open Memories
+    </button>
 
-
-                <button
-                    class="quick-button"
-                    onclick="showComingSoon()"
-                >
-                    ＋ Add Memory
-                </button>
-
-            </div>
+</div>
 
 
             <!-- EMERGENCY -->
