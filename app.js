@@ -71,7 +71,24 @@ function showComingSoon() {
         "✨ This section is coming next!"
     );
 }
+// =============================
+// OPEN PET SETTINGS
+// =============================
 
+function openSettings() {
+
+    if (!currentPetId) {
+
+        showToast(
+            "🐾 Please select a pet first!"
+        );
+
+        return;
+    }
+
+    window.location.href =
+        `settings.html?pet=${currentPetId}`;
+}
 // =============================
 // OPEN MEMORIES
 // =============================
